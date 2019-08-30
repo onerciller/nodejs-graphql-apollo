@@ -1,0 +1,31 @@
+version: '3'
+services:
+  db:
+    image: 'mysql:5.7'    
+    ports:      
+      - "3307:3306"
+    environment:         
+        MYSQL_ROOT_PASSWORD: nga
+        MYSQL_DATABASE: nga
+        MYSQL_USER: nga
+        MYSQL_PASSWORD: nga
+  api:
+    build:
+      dockerfile: Dockerfile
+      context: ./
+    volumes:
+      - /app/node_modules
+      - ./:/app
+    environment: 
+          DB_USER: nga
+          DB_PASSWORD: nga
+          DB_NAME: nga
+          DB_HOST: db         
+          PORT: 4000
+          TWITTER_CONSUMER_SECRET: TWITTER_CONSUMER_SECRET
+          TWITTER_CONSUMER_KEY: TWITTER_CONSUMER_KEY
+          TWITTER_CALLBACK_URL: TWITTER_CALLBACK_URL
+          MAILGUN_API_KEY: MAILGUN_API_KEY
+          EMBEDLY_API_KEY: EMBEDLY_API_KEY            
+    ports:
+      - '4000:4000'  
